@@ -76,15 +76,6 @@ if(isset($_COOKIE[$cookie_name])){
 			$text = $_POST["nachricht"]."\n";
 			$text = implode("&lt;",explode("<",$text));
 			$text = implode("&gt;",explode(">",$text));
-			$all = array("b", "u", "i", "blink");
-			if($r == "GERNOT"){
-				array_push($all,"article");
-				$text = implode("<br>",explode("&lt;br&gt;",$text));
-			}
-			foreach($all AS $tag) {
-				$text = implode("<$tag>",explode("&lt;$tag&gt;",$text));
-				$text = implode("</$tag>",explode("&lt;/$tag&gt;",$text));
-			}
 			$text = $vor.$text;
 			fwrite($datei, $text);
 			fclose($datei);
