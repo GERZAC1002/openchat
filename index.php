@@ -63,7 +63,7 @@ if(isset($_COOKIE[$cookie_name])){
 			fclose($extern);
 			fclose($intern);
 			$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Bild: ";
-			$text = "<a target=\"_blank\" href=\"../php/img/".$datnam."\">$datnam</a>";
+			$text = "<a target=\"_blank\" href=\"img/".$datnam."\">$datnam</a>";
 			$text = $vor.$text."\n";
 			fwrite($datei, $text);
 			fclose($datei);
