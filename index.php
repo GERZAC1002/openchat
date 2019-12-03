@@ -95,7 +95,7 @@ if(isset($_COOKIE[$cookie_name])){
 		}
 	}
 	echo "
-				<iframe scrolling=\"no\" src=\"text.php\" frameborder=\"0\" border=\"0\" ></iframe>
+				<iframe scrolling=\"yes\" src=\"text.php\" frameborder=\"0\" border=\"0\" ></iframe>
 			</form>
 		</center>
 	</body>
