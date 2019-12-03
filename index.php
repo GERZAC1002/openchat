@@ -45,7 +45,7 @@ if(isset($_COOKIE[$cookie_name])){
 		$text;
 		$inhalt;
 		if(isset($_POST["elink"])){
-			if((!empty($_POST["elink"])) and (strpos($_POST["elink"],"\"") === FALSE) and (strpos($_POST["elink"],">") === FALSE) and (strpos($_POST["elink"],"<") === FALSE)){
+			if((!empty($_POST["elink"])) and (strpos($_POST["elink"],"\"") === FALSE) and (strpos($_POST["elink"],">") === FALSE) and (strpos($_POST["elink"],"<") === FALSE)and strlen($_POST["elink"])<1024){
 				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
 				$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Link: ";
 				$text = "<a target=\"_blank\" href=\"".implode("&lt;",explode("<",implode("&gt;",explode(">",$_POST["elink"]))))."\">".$_POST["elink"]."</a>";
@@ -54,7 +54,7 @@ if(isset($_COOKIE[$cookie_name])){
 				fclose($datei);
 			}
 		}if(isset($_POST["bild"])){
-			if((!empty($_POST["bild"])) and (strpos($_POST["bild"],"\"") === FALSE) and (strpos($_POST["bild"],">") === FALSE) and (strpos($_POST["bild"],"<") === FALSE)){
+			if((!empty($_POST["bild"])) and (strpos($_POST["bild"],"\"") === FALSE) and (strpos($_POST["bild"],">") === FALSE) and (strpos($_POST["bild"],"<") === FALSE) and strlen($_POST["bild"])<1024){
 				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
 				$bildlink = $_POST["bild"];
 				$extern = fopen($bildlink,"rb");
@@ -76,7 +76,7 @@ if(isset($_COOKIE[$cookie_name])){
 				fclose($datei);
 			}
 		}
-		if(isset($_POST["nachricht"])){
+		if(isset($_POST["nachricht"]) and strlen($_POST["nachricht"]) < 4096){
 			if(!empty($_POST["nachricht"] )){
 				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
 				$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; ";
