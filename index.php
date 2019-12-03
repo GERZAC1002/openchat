@@ -90,6 +90,13 @@ if(isset($_COOKIE[$cookie_name])){
 }else{
 	if(isset($_POST["name"]) && isset($_POST["passwort"])){
 		$name = strtoupper($_POST["name"]);
+		if(strlen($name) > 10){
+			header('Location: ./index.php');
+			setcookie($cookie_name,"",time()-10);
+			header("Refresh:0");
+		}
+		$name = implode("&lt;",explode("<",$name));
+		$name = implode("&gt;",explode(">",$name));
 		$passwort = md5(md5($_POST["passwort"]).sha1($_POST["passwort"]));
 		$paar = $name . ";" . $passwort . "\n";
 		$datei = fopen("users.docx","a+") or die("Datei kann nicht geöffnet werden!");
