@@ -1,6 +1,11 @@
 <?php
 $cookie_name = "nutzername";
 $maxzeichen = 1024;
+
+if (!file_exists("img")) {
+	mkdir("img");
+}
+
 if(isset($_COOKIE[$cookie_name])){
 	if(isset($_POST["abmelden"])){
 		header('Location: ./index.php');
