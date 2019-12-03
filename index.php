@@ -101,9 +101,9 @@ if(isset($_COOKIE[$cookie_name])){
 	</body>
 </html>";
 }else{
-	if(isset($_POST["name"]) && isset($_POST["passwort"])){
+	if(isset($_POST["name"]) && isset($_POST["passwort"]) && strlen($_POST["passwort"]) < 30){
 		$name = strtoupper($_POST["name"]);
-		if(strlen($name) > 10){
+		if(strlen($name) > 30){
 			header('Location: ./index.php');
 			setcookie($cookie_name,"",time()-10);
 			header("Refresh:0");
