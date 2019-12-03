@@ -8,6 +8,13 @@ if(isset($_COOKIE[$cookie_name])){
 		header("Refresh:0");
 	}
 	$r = strtoupper($_COOKIE[$cookie_name]);
+	if(strlen($r) > 30){
+			header('Location: ./index.php');
+			setcookie($cookie_name,"",time()-10);
+			header("Refresh:0");
+	}
+	$r = implode("&lt;",explode("<",$r));
+	$r = implode("&gt;",explode(">",$r));
 	echo "<! DOCTYPE html><html><head><title>OpenChat</title>
 	<meta charset=\"utf-8\">
 	<style>
