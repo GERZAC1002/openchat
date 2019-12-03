@@ -12,80 +12,81 @@ if(isset($_COOKIE[$cookie_name])){
 			header('Location: ./index.php');
 			setcookie($cookie_name,"",time()-10);
 			header("Refresh:0");
-	}
-	$r = implode("&lt;",explode("<",$r));
-	$r = implode("&gt;",explode(">",$r));
-	echo "<! DOCTYPE html><html><head><title>OpenChat</title>
-	<meta charset=\"utf-8\">
-	<style>
-		body {background-color: #003366;color: #66ffff;}
-		textarea {font-size: 20px;font-family: monospace;background-color: #003366;color: #66ff66;width: 90%;height: 80%;}
-		#e1 {width: 90%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;}
-		#e2 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:left;margin-left: 5%;}
-		#e5 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:right;margin-right: 5%;}
-		#e3 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:right;margin-right: 5%;}
-		#e4 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:left;margin-left: 5%;}
-		iframe {word-wrap: break-word;text-align: center;font-size: 20px;font-family: monospace;background-color: #003366;color: #66ff66;width: 90%;height: 1000%;}
-	</style>
-	</head>
-	<body>
-	<center>
-	<form method=post>
-	<h1><u>Simples CHAT Programm</u></h1>
-	<p><b> Ein Chatprogramm, bei dem jeder teilnehmen kann. Zeichenbegrenzung: $maxzeichen Zeichen</b>
-	<br>Alle 5 Sekunde(n) wird automatisch aktualisiert<br>Links unbedingt mit http(s):// eingeben
-	</p>
-	<br><input autofocus id=\"e1\" name=\"nachricht\" type=text placeholder=\"Hier Text einfügen!\" maxlength=$maxzeichen ><br><br>
-	<input id=\"e2\" name=\"elink\" type=text placeholder=\"Hier Link einfügen!\" maxlength=$maxzeichen >
-	<input id=\"e5\" name=\"bild\" type=text placeholder=\"Hier Bildlink einfügen!\" maxlength=$maxzeichen ><br>
-	</center><br>
-	<input type=\"submit\" id=\"e4\" name=\"absenden\" value=\"Absenden\"><input id=\"e3\" type=\"submit\" name=\"abmelden\" value=\"Abmelden\"><br><center>";
-	date_default_timezone_set('Europe/Berlin');
-	$datei;
-	$text;
-	$inhalt;
-	if(isset($_POST["elink"])){
-		if(!empty($_POST["elink"])){
-			$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
-			$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Link: ";
-			$text = "<a target=\"_blank\" href=\"".implode("&lt;",explode("<",implode("&gt;",explode(">",$_POST["elink"]))))."\">".$_POST["elink"]."</a>";
-			$text = $vor.$text."\n";
-			fwrite($datei, $text);
-			fclose($datei);
-		}
-	}if(isset($_POST["bild"])){
-		if(!empty($_POST["bild"])){
-			$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
-			$bildlink = $_POST["bild"];
-			$extern = fopen($bildlink,"rb");
-			$inhalt = stream_get_contents($extern);
-			$datnam = strrev(strtok(strrev($_POST["bild"]),"/"));
-			$endung = strrev(strtok(strrev($datnam),"."));
-			$datnam = rand(100000,999999).".$endung";
-			while(file_exists("img/".$datnam)){
-					$datnam = rand(100000,999999).".$endung";
+	}else{
+		$r = implode("&lt;",explode("<",$r));
+		$r = implode("&gt;",explode(">",$r));
+		echo "<! DOCTYPE html><html><head><title>OpenChat</title>
+		<meta charset=\"utf-8\">
+		<style>
+			body {background-color: #003366;color: #66ffff;}
+			textarea {font-size: 20px;font-family: monospace;background-color: #003366;color: #66ff66;width: 90%;height: 80%;}
+			#e1 {width: 90%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;}
+			#e2 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:left;margin-left: 5%;}
+			#e5 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:right;margin-right: 5%;}
+			#e3 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:right;margin-right: 5%;}
+			#e4 {width: 45%;font-size: 20px;background-color: #003366;color: #66ff66;box-shadow: 0 0 0px #66ff66;border-color:#66ff66;float:left;margin-left: 5%;}
+			iframe {word-wrap: break-word;text-align: center;font-size: 20px;font-family: monospace;background-color: #003366;color: #66ff66;width: 90%;height: 1000%;}
+		</style>
+		</head>
+		<body>
+		<center>
+		<form method=post>
+		<h1><u>Simples CHAT Programm</u></h1>
+		<p><b> Ein Chatprogramm, bei dem jeder teilnehmen kann. Zeichenbegrenzung: $maxzeichen Zeichen</b>
+		<br>Alle 5 Sekunde(n) wird automatisch aktualisiert<br>Links unbedingt mit http(s):// eingeben
+		</p>
+		<br><input autofocus id=\"e1\" name=\"nachricht\" type=text placeholder=\"Hier Text einfügen!\" maxlength=$maxzeichen ><br><br>
+		<input id=\"e2\" name=\"elink\" type=text placeholder=\"Hier Link einfügen!\" maxlength=$maxzeichen >
+		<input id=\"e5\" name=\"bild\" type=text placeholder=\"Hier Bildlink einfügen!\" maxlength=$maxzeichen ><br>
+		</center><br>
+		<input type=\"submit\" id=\"e4\" name=\"absenden\" value=\"Absenden\"><input id=\"e3\" type=\"submit\" name=\"abmelden\" value=\"Abmelden\"><br><center>";
+		date_default_timezone_set('Europe/Berlin');
+		$datei;
+		$text;
+		$inhalt;
+		if(isset($_POST["elink"])){
+			if(!empty($_POST["elink"])){
+				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
+				$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Link: ";
+				$text = "<a target=\"_blank\" href=\"".implode("&lt;",explode("<",implode("&gt;",explode(">",$_POST["elink"]))))."\">".$_POST["elink"]."</a>";
+				$text = $vor.$text."\n";
+				fwrite($datei, $text);
+				fclose($datei);
 			}
-			$intern = fopen("img/".$datnam,"wb");
-			fwrite($intern,$inhalt);
-			fclose($extern);
-			fclose($intern);
-			$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Bild: ";
-			$text = "<a target=\"_blank\" href=\"img/".$datnam."\">$datnam</a>";
-			$text = $vor.$text."\n";
-			fwrite($datei, $text);
-			fclose($datei);
+		}if(isset($_POST["bild"])){
+			if(!empty($_POST["bild"])){
+				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
+				$bildlink = $_POST["bild"];
+				$extern = fopen($bildlink,"rb");
+				$inhalt = stream_get_contents($extern);
+				$datnam = strrev(strtok(strrev($_POST["bild"]),"/"));
+				$endung = strrev(strtok(strrev($datnam),"."));
+				$datnam = rand(100000,999999).".$endung";
+				while(file_exists("img/".$datnam)){
+						$datnam = rand(100000,999999).".$endung";
+				}
+				$intern = fopen("img/".$datnam,"wb");
+				fwrite($intern,$inhalt);
+				fclose($extern);
+				fclose($intern);
+				$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; Bild: ";
+				$text = "<a target=\"_blank\" href=\"img/".$datnam."\">$datnam</a>";
+				$text = $vor.$text."\n";
+				fwrite($datei, $text);
+				fclose($datei);
+			}
 		}
-	}
-	if(isset($_POST["nachricht"])){
-		if(!empty($_POST["nachricht"] )){
-			$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
-			$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; ";
-			$text = $_POST["nachricht"]."\n";
-			$text = implode("&lt;",explode("<",$text));
-			$text = implode("&gt;",explode(">",$text));
-			$text = $vor.$text;
-			fwrite($datei, $text);
-			fclose($datei);
+		if(isset($_POST["nachricht"])){
+			if(!empty($_POST["nachricht"] )){
+				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
+				$vor = "<font color=#ff0066>".date("Y/m/d H:i:s")."</font>"." <font color=#ffff00>$r</font>&gt; ";
+				$text = $_POST["nachricht"]."\n";
+				$text = implode("&lt;",explode("<",$text));
+				$text = implode("&gt;",explode(">",$text));
+				$text = $vor.$text;
+				fwrite($datei, $text);
+				fclose($datei);
+			}
 		}
 	}
 	echo "
