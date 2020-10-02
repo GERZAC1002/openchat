@@ -41,8 +41,7 @@ if(isset($_COOKIE[$cookie_name])){
 		<br>Alle 5 Sekunde(n) wird automatisch aktualisiert<br>Links unbedingt mit http(s):// eingeben
 		</p>
 		<br><input autofocus id=\"e1\" name=\"nachricht\" type=text placeholder=\"Hier Text einfügen!\" maxlength=$maxzeichen ><br><br>
-		<input id=\"e2\" name=\"elink\" type=text placeholder=\"Hier Link einfügen!\" maxlength=$maxzeichen >
-		<input id=\"e5\" name=\"bild\" type=text placeholder=\"Hier Bildlink einfügen!\" maxlength=$maxzeichen ><br>
+		<input id=\"e2\" name=\"elink\" type=text placeholder=\"Hier Link einfügen!\" maxlength=$maxzeichen ><br>
 		</center><br>
 		<input type=\"submit\" id=\"e4\" name=\"absenden\" value=\"Absenden\"><input id=\"e3\" type=\"submit\" name=\"abmelden\" value=\"Abmelden\"><br><center>";
 		date_default_timezone_set('Europe/Berlin');
@@ -58,7 +57,8 @@ if(isset($_COOKIE[$cookie_name])){
 				fwrite($datei, $text);
 				fclose($datei);
 			}
-		}if(isset($_POST["bild"])){
+		}
+/*		if(isset($_POST["bild"])){
 			if((!empty($_POST["bild"])) and (strpos($_POST["bild"],"\"") === FALSE) and (strpos($_POST["bild"],">") === FALSE) and (strpos($_POST["bild"],"<") === FALSE) and strlen($_POST["bild"])<1024){
 				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
 				$bildlink = $_POST["bild"];
@@ -80,7 +80,7 @@ if(isset($_COOKIE[$cookie_name])){
 				fwrite($datei, $text);
 				fclose($datei);
 			}
-		}
+		}*/
 		if(isset($_POST["nachricht"]) and strlen($_POST["nachricht"]) < 4096){
 			if(!empty($_POST["nachricht"] )){
 				$datei = fopen("chat".date("Y_m_d").".xls","a+") or die("Datei kann nicht geöffnet werden!");
